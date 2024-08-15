@@ -1,5 +1,5 @@
 import { Template } from '@/types/templates';
-import { Schema, model } from 'mongoose';
+import { Schema, model, models } from 'mongoose';
 
 const templateSchema = new Schema<Template>({
     name: {
@@ -49,6 +49,6 @@ const templateSchema = new Schema<Template>({
     ],
 });
 
-const TemplateModel = model<Template>('Template', templateSchema);
+const TemplateModel = models.Template || model<Template>('Template', templateSchema);
 
 export default TemplateModel;
