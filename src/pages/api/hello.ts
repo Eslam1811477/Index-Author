@@ -1,13 +1,28 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import type { NextApiRequest, NextApiResponse } from "next";
+import { getAllTemplatsData } from '@/func/templates';
+import { mainResponse } from '@/types/response';
+import { NextApiRequest, NextApiResponse } from 'next';
 
-type Data = {
-  name: string;
-};
+export default function getAll(req: NextApiRequest, res: NextApiResponse) {
 
-export default function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<Data>,
-) {
-  res.status(200).json({ name: "John Doe" });
+    const data = getAllTemplatsData()
+
+
+    const response: mainResponse = {
+        actionDone: true,
+        msg: '',
+        data: []
+    }
+    let responseCode = 0;
+
+    if (data) {
+        response.data = data
+        response.msg = 'The data was successfully sent'
+        responseCode = 200
+    } else {
+        response.data = []
+        response.msg = 'No data was found'
+        response.actionDone = false
+        responseCode = 404
+    }
+    res.status(responseCode).json(data);
 }
