@@ -1,7 +1,6 @@
-import { Document } from 'mongoose';
 
 
-export interface Template extends Document {
+export interface Template {
     name:string;
     imgUrl:string;
     plugins:{

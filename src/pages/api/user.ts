@@ -1,8 +1,10 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { createUser } from '@/func/user';
+import { DBConnect } from '@/db';
 
 export default async function POST(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'POST') {
+        await DBConnect();
         const { username, email } = req.body;
 
         console.log(req.body)
